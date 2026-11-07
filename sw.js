@@ -1,0 +1,4 @@
+const C='g7-v2.3.0',F=["./", "index.html", "manifest.json", "assets/excel.png", "assets/pdf.png", "assets/whatsapp.png", "assets/claude.png", "assets/icon-180.png", "lib/exceljs.min.js", "lib/jspdf.umd.min.js", "lib/fonts.css", "lib/nunito-400.woff2", "lib/nunito-600.woff2", "lib/nunito-700.woff2", "lib/nunito-800.woff2"];
+self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(F)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{if(r.ok){const c=r.clone();caches.open(C).then(x=>x.put(e.request,c))}return r}).catch(()=>caches.match(e.request)))});

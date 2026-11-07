@@ -27,7 +27,7 @@ body{overflow-x:hidden;touch-action:manipulation;-webkit-text-size-adjust:100%;b
 button,input,textarea{font-family:inherit;color:inherit}
 svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .wrap{max-width:640px;margin:0 auto;padding:4px 16px calc(60px + env(safe-area-inset-bottom,0px))}
-header{display:flex;align-items:center;gap:12px;position:fixed;top:0;left:0;right:0;z-index:5;background:var(--bg);box-sizing:border-box;height:calc(env(safe-area-inset-top,0px) + 62px);padding:env(safe-area-inset-top,0px) max(16px,calc(50% - 304px)) 0;will-change:transform}#sc{position:fixed;left:0;right:0;bottom:0;top:calc(env(safe-area-inset-top,0px) + 62px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
+header{display:flex;align-items:center;gap:12px;height:62px}#sc{position:fixed;left:0;right:0;bottom:0;top:0;padding-top:env(safe-area-inset-top,0px);overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:auto;-webkit-overflow-scrolling:touch}
 header h1{flex:1;margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
 header img{width:36px;height:36px;border-radius:50%}
 .ib{background:none;border:0;padding:6px;cursor:pointer;color:var(--soft);border-radius:50%;display:flex}
@@ -86,7 +86,7 @@ textarea:focus,input:focus{outline:2px solid var(--acc)}
 .ck.on{background:var(--acc);border-color:var(--acc);color:#fff}.ck svg{width:16px;height:16px;stroke-width:3}
 .src{margin:10px 6px 2px;font-size:11.5px;line-height:1.4;opacity:.45;white-space:pre-line;overflow-wrap:anywhere}
 .lnk{color:var(--lk);text-decoration:underline;cursor:pointer}
-#v-set.on{display:flex;flex-direction:column;min-height:calc(100dvh - env(safe-area-inset-top,0px) - 110px)}
+#v-set.on{display:flex;flex-direction:column;min-height:calc(100dvh - env(safe-area-inset-top,0px) - 70px)}
 #v-set .about{margin-top:auto;padding:22px 0 8px}
 .bk{display:flex;gap:10px}.bk .btn{margin-top:14px;padding:11px 10px;font-size:14px}
 .dng{background:var(--red);color:#fff}
@@ -118,21 +118,39 @@ header img{flex:none;display:block;object-fit:cover}
 #proc.go .s1{animation:tw1 .7s ease-out}#proc.go .s2{animation:tw2 .7s .12s ease-out}
 .about{text-align:center}.about .lnk{font-weight:700}
 .seg button{padding:11px 2px}.seg{gap:2px}
+#v-main .sec{border-top:4px solid var(--c)}
+#v-main .sec:nth-child(1){--c:#9ADBBE}#v-main .sec:nth-child(2){--c:#A8C8F5}#v-main .sec:nth-child(3){--c:#D2B8F2}#v-main .sec:nth-child(4){--c:#F8D49A}
+#themes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+#themes::before{content:'';position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/3);border-radius:999px;background:var(--acc);transform:translateX(calc(var(--i,0)*100%));transition:transform .35s cubic-bezier(.3,.9,.3,1)}
+#themes button{position:relative;z-index:1;transition:color .25s}#themes button.on{background:none;color:#fff}
+.pvw{display:flex;justify-content:center}
+.pv{flex:none;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.2);background:#fff;cursor:zoom-in;transition:width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1)}
+.pv img{display:block;width:100%;height:100%}.pvw{align-items:center}.pvw.has{height:360px}
+.cropr{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;padding:2px 4px;cursor:pointer;line-height:1.2;user-select:none}.cropr .ck{margin:0}
+#fs{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.92);display:none;touch-action:none;overflow:hidden;align-items:center;justify-content:center}
+#fs.open{display:flex;animation:fade .25s}#fs.closing{display:flex;animation:fadeo .2s forwards}
+#fs img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center;user-select:none;-webkit-user-drag:none;background:#fff}
+#fsx{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;color:#fff;z-index:2;background:rgba(255,255,255,.18);padding:10px}
+@keyframes cas{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+.rc.enter{animation:cas .55s cubic-bezier(.05,.85,.2,1) both}
+#mtabs{display:grid;grid-template-columns:repeat(2,1fr);gap:0;position:relative}
+#mtabs::before{content:'';position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/2);border-radius:999px;background:var(--acc);transform:translateX(calc(var(--i,0)*100%));transition:transform .35s cubic-bezier(.3,.9,.3,1)}
+#mtabs button{position:relative;z-index:1;transition:color .25s}#mtabs button.on{background:none;color:#fff}
 </style>
 </head>
 <body>
+<div id="sc"><div class="wrap">
 <header>
   <button class="ib" id="back" style="display:none"></button>
   <h1 id="title">Salidas G7</h1>
   <button class="ib" id="gear"></button>
 </header>
-<div id="sc"><div class="wrap">
 
 <div class="view on" id="v-main">
   <div class="sec">
     <div class="st"><span data-i="msg"></span>Mensaje<button class="ib" id="clear" data-i="x"></button></div>
     <textarea id="raw" placeholder="Pegá el mensaje de WhatsApp"></textarea>
-    <button class="btn pri" id="proc"><span data-i="spark"></span>Procesar</button>
+    <button class="btn pri" id="proc"><span data-i="spark"></span>Generar</button>
   </div>
   <div class="sec">
     <div class="st"><span data-i="cal"></span>Salidas</div>
@@ -141,7 +159,12 @@ header img{flex:none;display:block;object-fit:cover}
     <button class="btn soft" id="addrow" style="display:none"><span data-i="plus"></span>Agregar salida</button>
   </div>
   <div class="sec">
+    <div class="st"><span data-i="eye"></span>Vista previa</div>
+    <div class="pvw"><div class="pv" id="pv" style="display:none"><img id="pvi" alt=""></div><div class="empty" id="pve" data-i="eye"></div></div>
+  </div>
+  <div class="sec">
     <div class="st"><span data-i="dl"></span>Exportar</div>
+    <div class="cropr" id="cropr"><button class="ck" id="crop" data-i="check"></button>Recortar</div>
     <button class="btn exp" id="b-wa" disabled><img src="assets/whatsapp.png" alt="">Compartir por WhatsApp</button>
     <button class="btn exp" id="b-xl" disabled><img src="assets/excel.png" alt="">Exportar como Excel</button>
     <button class="btn exp" id="b-pdf" disabled><img src="assets/pdf.png" alt="">Exportar como PDF</button>
@@ -167,7 +190,7 @@ header img{flex:none;display:block;object-fit:cover}
   <div class="sec">
     <div class="seg" id="mtabs" style="margin-top:0;margin-bottom:12px">
       <button data-k="nombres"><span data-i="user"></span>Nombres</button>
-      <button data-k="territorios"><span data-i="hash"></span>Terr.</button>
+      
       <button data-k="lugares"><span data-i="pin"></span>Lugares</button>
     </div>
     <div class="add"><div class="field"><input id="mi" placeholder="Agregar"></div><button class="ib" id="madd" data-i="plus"></button></div>
@@ -178,11 +201,14 @@ header img{flex:none;display:block;object-fit:cover}
 </div>
 </div></div>
 <datalist id="dl-n"></datalist><datalist id="dl-t"></datalist><datalist id="dl-l"></datalist>
-<div id="rot"><span data-i="rot"></span>Girá el teléfono</div><div id="md"></div><input type="file" id="fi" accept=".g7mem" hidden>
+<div id="rot"><span data-i="rot"></span>Girá el teléfono</div><div id="fs"><button class="ib" id="fsx" data-i="x"></button><img id="fsimg" alt=""></div><div id="md"></div><input type="file" id="fi" accept=".g7mem" hidden>
 <div id="toast"></div>
 
 <script>
 const LOG=[
+{v:'2.5.1',d:'07/11/2026',i:['Rebote natural al llegar al tope o al final con un impulso del dedo: la pantalla sigue, se frena, vuelve y se acomoda en el límite','El selector de Nombres y Lugares en Memoria también se desliza']},
+{v:'2.5.0',d:'07/11/2026',i:['Líneas de las secciones en tonos pastel','Efecto de rebote al llegar al tope o al final de la pantalla','Memoria sin la categoría Territorios y con nombres y lugares ordenados de la A a la Z','«Recortar» ya no mueve el resto de la interfaz: la vista previa cambia de formato dentro de su sección','Las salidas caen en cascada al generar','«Procesar» ahora se llama «Generar»']},
+{v:'2.4.0',d:'07/11/2026',i:['La barra superior se desplaza junto con el contenido','Casilla «Recortar» en Exportar: sin recortar la hoja sale vertical y recortada sale horizontal (se recuerda al cerrar la app)','El selector de tema se desliza','Línea de color en el borde superior de cada sección','La imagen usa la fuente Bahnschrift','«Territorio» pasa a «Territ.» en imagen, PDF y Excel','Vista previa de la planilla con pantalla completa y zoom suave']},
 {v:'2.3.0',d:'07/11/2026',i:['Se quitó el ícono de la app del encabezado','Los temas ahora son solo íconos, más grandes, y el medio sol toma el mismo color que los demás','Nuevo ícono de círculo para el título «Tema»','Enter lleva el cursor al final del texto','La pantalla sube más y sigue al cursor con un movimiento rápido','Bloqueo de rotación de pantalla','Barra superior fija que no se mueve con la pantalla']},
 {v:'2.2.0',d:'07/11/2026',i:['Íconos alineados con sus textos','Tema «Por defecto» con ícono de medio sol','Nuevos íconos de papel para PDF y Excel, más pequeños','Botones «Exportar como…» sin mensajes al compartir','Enter lleva el cursor al inicio del siguiente campo y centra la pantalla','Transición entre secciones con deslizamiento rápido y suave','Animación en las estrellitas de «Procesar»','Las salidas nuevas se agregan sin resaltado','Corrección del color de la versión y del parpadeo de «Memoria»']},
 {v:'2.1.0',d:'07/11/2026',i:['Se eliminó la sección Apellidos: ahora se usa «Reemplazar por…» dentro de Memoria','Aviso antes de eliminar un ítem de la memoria','Copia de seguridad e importación de la memoria en un archivo encriptado','Animaciones y transiciones fluidas','Enter pasa al siguiente campo','Texto original transcripto debajo de cada día','Casilla para activar o quitar el resaltado de cada día','Excel, PDF e imagen se comparten desde el menú del dispositivo','Se bloqueó el zoom y se corrigieron cajas de texto fuera de lugar','Nuevos logos de Excel y PDF y nuevo orden en Configuración']},
@@ -196,7 +222,7 @@ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',hash:'<path d="M4
 pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
 user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
 cal:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/>',
-msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/>',rot:'<path d="M12 2a10 10 0 0 1 10 10M22 12l-3-3M22 12l3-3" transform="translate(-2 0)"/><path d="M8 22h8a2 2 0 0 0 2-2v-4M6 8v12a2 2 0 0 0 2 2"/>',swap:'<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>',check:'<path d="m5 12 5 5L20 7"/>',up2:'<path d="M12 15V3m0 0-4 4m4-4 4 4M4 19c0 1 1 2 2 2h12c1 0 2-1 2-2"/>',
+msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/>',rot:'<path d="M12 2a10 10 0 0 1 10 10M22 12l-3-3M22 12l3-3" transform="translate(-2 0)"/><path d="M8 22h8a2 2 0 0 0 2-2v-4M6 8v12a2 2 0 0 0 2 2"/>',eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',swap:'<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>',check:'<path d="m5 12 5 5L20 7"/>',up2:'<path d="M12 15V3m0 0-4 4m4-4 4 4M4 19c0 1 1 2 2 2h12c1 0 2-1 2-2"/>',
 spark:'<path class="s1" d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path class="s2" d="M19 17v4M17 19h4"/>',
 up:'<path d="m18 15-6-6-6 6"/>',down:'<path d="m6 9 6 6 6-6"/>',
 sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
@@ -209,8 +235,8 @@ const ic=n=>`<svg class="i" viewBox="0 0 24 24">${P[n]}</svg>`;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const LS={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let mem=Object.assign({nombres:[],territorios:[],lugares:[]},LS.get('g7_mem',{}));
-mem.rep=Object.assign({nombres:{},territorios:{},lugares:{}},mem.rep||{});
+let mem=Object.assign({nombres:[],lugares:[]},LS.get('g7_mem',{}));
+delete mem.territorios;mem.rep=Object.assign({nombres:{},lugares:{}},mem.rep||{});delete mem.rep.territorios;
 let theme=LS.get('g7_theme','system'),rows=[],mtab='nombres';
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2300)}
 
@@ -292,14 +318,14 @@ function guessSub(r){
 /* ===== MEMORIA ===== */
 const rk=v=>v.trim().toLowerCase();
 function saveMem(){
-  mem.nombres.sort((a,b)=>a.localeCompare(b));mem.lugares.sort((a,b)=>a.localeCompare(b));mem.territorios.sort((a,b)=>parseInt(a)-parseInt(b));
+  mem.nombres.sort((a,b)=>a.localeCompare(b,'es'));mem.lugares.sort((a,b)=>a.localeCompare(b,'es'));
   LS.set('g7_mem',mem);
   const f=a=>a.map(v=>`<option value="${esc(v)}">`).join('');
-  $('#dl-n').innerHTML=f(mem.nombres);$('#dl-t').innerHTML=f(mem.territorios);$('#dl-l').innerHTML=f(mem.lugares);
+  $('#dl-n').innerHTML=f(mem.nombres);$('#dl-l').innerHTML=f(mem.lugares);
 }
 function addMem(k,v){v=(v||'').trim();if(v&&!mem[k].some(x=>rk(x)===rk(v)))mem[k].push(v)}
-function remember(){rows.forEach(r=>{addMem('nombres',r.conductor);addMem('lugares',r.lugar);(r.territorio.match(/\d+/g)||[]).forEach(t=>addMem('territorios',t))});saveMem()}
-function applyRep(){const R=mem.rep;rows.forEach(r=>{r.conductor=R.nombres[rk(r.conductor)]||r.conductor;r.lugar=R.lugares[rk(r.lugar)]||r.lugar;r.territorio=r.territorio.replace(/\d+/g,n=>R.territorios[n]||n)})}
+function remember(){rows.forEach(r=>{addMem('nombres',r.conductor);addMem('lugares',r.lugar)});saveMem()}
+function applyRep(){const R=mem.rep;rows.forEach(r=>{r.conductor=R.nombres[rk(r.conductor)]||r.conductor;r.lugar=R.lugares[rk(r.lugar)]||r.lugar})}
 function modal(title,body,btns){
   const m=$('#md');
   m.innerHTML=`<div class="mb"><div class="mc">${title?`<h3>${title}</h3>`:''}<div>${body}</div><div class="mbt">${btns.map((b,i)=>`<button class="btn ${b.c||'soft'}" data-b="${i}">${b.t}</button>`).join('')}</div></div></div>`;
@@ -319,6 +345,7 @@ function askRep(i){
 function showLog(){modal('',LOG.map(e=>`<h4>Versión ${e.v} · ${e.d}</h4><ul>${e.i.map(x=>`<li>${x}</li>`).join('')}</ul>`).join(''),[{t:'Cerrar'}])}
 function renderMem(){
   $$('#mtabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===mtab));
+  $('#mtabs').style.setProperty('--i',['nombres','lugares'].indexOf(mtab));
   const R=mem.rep[mtab];
   $('#mlist').innerHTML=mem[mtab].map((v,i)=>`<div class="chip"><div class="cn">${esc(v)}${R[rk(v)]?`<small>→ ${esc(R[rk(v)])}</small>`:''}</div><button class="ib" data-r="${i}">${ic('swap')}</button><button class="ib dl" data-d="${i}">${ic('trash')}</button></div>`).join('')||`<div class="empty">${ic('brain')}</div>`;
   
@@ -327,18 +354,18 @@ function renderMem(){
 async function ckey(){const e=new TextEncoder(),k=await crypto.subtle.importKey('raw',e.encode('G7-salidas-memoria-v1'),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:e.encode('g7-salt'),iterations:100000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 async function encMem(){const iv=crypto.getRandomValues(new Uint8Array(12)),ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await ckey(),new TextEncoder().encode(JSON.stringify({app:'g7',v:1,mem}))));const all=new Uint8Array(12+ct.length);all.set(iv);all.set(ct,12);return new Blob([new TextEncoder().encode('G7MEM1'),all],{type:'application/octet-stream'})}
 async function decMem(buf){const u=new Uint8Array(buf);if(new TextDecoder().decode(u.slice(0,6))!=='G7MEM1')throw 0;const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(6,18)},await ckey(),u.slice(18));return JSON.parse(new TextDecoder().decode(pt)).mem}
-function mergeMem(m){['nombres','territorios','lugares'].forEach(k=>{(m[k]||[]).forEach(v=>addMem(k,v));Object.assign(mem.rep[k],(m.rep||{})[k]||{})});saveMem()}
+function mergeMem(m){['nombres','lugares'].forEach(k=>{(m[k]||[]).forEach(v=>addMem(k,v));Object.assign(mem.rep[k],(m.rep||{})[k]||{})});saveMem()}
 
 /* ===== TABLA ===== */
 function renderRows(a){
-  const has=rows.length>0;
+  const has=rows.length>0;updatePreview();
   ['#b-wa','#b-xl','#b-pdf'].forEach(s=>$(s).disabled=!has);
   $('#addrow').style.display=has?'flex':'none';
   const inp=(i,f,v,x='',ph='')=>`<input data-i="${i}" data-f="${f}" value="${esc(v)}" enterkeyhint="next" ${x} ${ph?`placeholder="${ph}"`:''}>`;
-  $('#rows').innerHTML=has?rows.map((r,i)=>`<div class="rc ${r.manual?'man':''} ${a?'enter':''}" ${a?`style="animation-delay:${Math.min(i,10)*45}ms"`:''}><div class="top"><button class="ck ${r.manual?'on':''}" data-c="${i}">${ic('check')}</button>${inp(i,'dia',r.dia)}
+  $('#rows').innerHTML=has?rows.map((r,i)=>`<div class="rc ${r.manual?'man':''} ${a?'enter':''}" ${a?`style="animation-delay:${Math.min(i,12)*70}ms"`:''}><div class="top"><button class="ck ${r.manual?'on':''}" data-c="${i}">${ic('check')}</button>${inp(i,'dia',r.dia)}
     <button class="ib" data-m="${i}:-1" ${i?'':'disabled'}>${ic('up')}</button><button class="ib" data-m="${i}:1" ${i<rows.length-1?'':'disabled'}>${ic('down')}</button><button class="ib dl" data-x="${i}">${ic('trash')}</button></div>
     <div class="g"><div class="field">${ic('clock')}${inp(i,'hora',r.hora,'','hh:mm')}</div>
-    <div class="field">${ic('hash')}${inp(i,'territorio',r.territorio,'list="dl-t"')}</div>
+    <div class="field">${ic('hash')}${inp(i,'territorio',r.territorio)}</div>
     <div class="field w">${ic('pin')}${inp(i,'lugar',r.lugar,'list="dl-l"')}</div>
     <div class="field w">${ic('user')}${inp(i,'conductor',r.conductor,'list="dl-n"')}</div></div>${r.src?`<div class="src">${esc(r.src)}</div>`:''}</div>`).join('')
     :`<div class="empty">${ic('cal')}</div>`;
@@ -347,43 +374,55 @@ function renderRows(a){
 /* ===== EXPORTAR ===== */
 async function out(blob,name,type){const f=new File([blob],name,{type});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});return}catch(e){if(e.name==='AbortError')return}}dl(blob,name)}
 function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
+let cropOn=LS.get('g7_crop',false),pvT=0,pvURL='';
+const FF='"Bahnschrift","Barlow Semi Condensed",Arial,sans-serif';
+async function loadFonts(){try{await Promise.all(['400','600','700','italic 400'].map(w=>document.fonts.load(`${w} 40px "Barlow Semi Condensed"`)))}catch(e){}}
 function drawCanvas(){
   const W=1600,rh=100,hh=104,top=270,cols=[20.39,12.76,50.96,10.5,29.84],tot=cols.reduce((a,b)=>a+b),M=40;
-  const cw=cols.map(c=>c/tot*(W-2*M)),H=top+hh+rows.length*rh+M;
+  const need=top+hh+rows.length*rh+M,cw=cols.map(c=>c/tot*(W-2*M)),H=cropOn?need:Math.max(need,Math.round(W*1.4142));
   const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
   x.fillStyle='#fff';x.fillRect(0,0,W,H);x.textAlign='center';x.textBaseline='middle';x.fillStyle='#000';
-  const F='Nunito,Bahnschrift,Arial,sans-serif';
-  const fit=(t,w,s,st)=>{let z=s;do{x.font=`${st} ${z}px ${F}`;z-=2}while(x.measureText(t).width>w-24&&z>14);x.fillText(t,0,0)};
+  const fit=(t,w,s,st)=>{let z=s;do{x.font=`${st} ${z}px ${FF}`;z-=2}while(x.measureText(t).width>w-24&&z>14);x.fillText(t,0,0)};
   const put=(t,cx,cy,w,s,st)=>{x.save();x.translate(cx,cy);fit(t,w,s,st);x.restore()};
-  put('Salidas de Congregación y del Grupo 7',W/2,100,W-2*M,70,'800');
-  put($('#sub').value||'',W/2,190,W-2*M,56,'700');
+  put('Salidas de Congregación y del Grupo 7',W/2,100,W-2*M,70,'bold');
+  put($('#sub').value||'',W/2,190,W-2*M,56,'bold');
   x.lineWidth=2.5;x.strokeStyle='#000';
-  const line=(y,h,fill,items,bold,it)=>{
+  const line=(y,h,fill,items,bold,it,man)=>{
     let px=M;items.forEach((t,k)=>{
       if(fill){x.fillStyle=fill;x.fillRect(px,y,cw[k],h)}
       x.strokeRect(px,y,cw[k],h);x.fillStyle='#000';
-      put(t,px+cw[k]/2,y+h/2,cw[k],bold?44:40,(bold?'800 ':(it[k]?'italic 600 ':'600 ')).trim().replace(/^(\d+) /,'$1 '));
+      put(t,px+cw[k]/2,y+h/2,cw[k],bold?44:40,bold?'bold':(man?'600':(it[k]?'italic 400':'400')));
       px+=cw[k]});
   };
-  line(top,hh,'#00FE7F',['Día','Hora','Lugar de encuentro','Territorio','Conductor'],true,[]);
-  rows.forEach((r,i)=>line(top+hh+i*rh,rh,null,[r.dia,r.hora,r.lugar,r.territorio,r.conductor],false,[1,0,1,0,1]));
+  line(top,hh,'#00FE7F',['Día','Hora','Lugar de encuentro','Territ.','Conductor'],true,[]);
+  rows.forEach((r,i)=>line(top+hh+i*rh,rh,null,[r.dia,r.hora,r.lugar,r.territorio,r.conductor],false,[1,0,1,0,1],r.manual));
   return c;
 }
 const toBlob=(c,t,q)=>new Promise(r=>c.toBlob(r,t,q));
-async function shareWA(){out(await toBlob(drawCanvas(),'image/png'),'Salidas_G7.png','image/png')}
-function makePDF(){
-  const c=drawCanvas(),ls=c.height/c.width<1.1,pdf=new jspdf.jsPDF({orientation:ls?'landscape':'portrait',unit:'mm',format:'a4'});
+async function shareWA(){await loadFonts();out(await toBlob(drawCanvas(),'image/png'),'Salidas_G7.png','image/png')}
+async function makePDF(){
+  await loadFonts();
+  const c=drawCanvas(),ls=cropOn&&c.height/c.width<1.1,pdf=new jspdf.jsPDF({orientation:ls?'landscape':'portrait',unit:'mm',format:'a4'});
   const pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight(),k=Math.min((pw-16)/c.width,(ph-16)/c.height);
   pdf.addImage(c.toDataURL('image/jpeg',.95),'JPEG',(pw-c.width*k)/2,8,c.width*k,c.height*k);
   return out(pdf.output('blob'),'Salidas_G7.pdf','application/pdf');
 }
+function updatePreview(){
+  clearTimeout(pvT);
+  pvT=setTimeout(async()=>{
+    const has=rows.length>0,w=$('.pvw'),pv=$('#pv');w.classList.toggle('has',has);pv.style.display=has?'':'none';$('#pve').style.display=has?'none':'flex';
+    if(!has){pvURL='';return}
+    await loadFonts();const c=drawCanvas(),r=c.width/c.height,pw=Math.min(w.clientWidth||320,360*r);
+    pvURL=c.toDataURL('image/png');$('#pvi').src=pvURL;pv.style.width=pw+'px';pv.style.height=pw/r+'px';
+  },120);
+}
 async function makeXLSX(){
   const wb=new ExcelJS.Workbook(),ws=wb.addWorksheet('Hoja1');
-  ws.columns=[20.39,12.76,50.96,10.5,29.84].map(width=>({width}));
+  ws.columns=[20.39,12.76,50.96,10.5,29.84].map(width=>({width}));ws.pageSetup={orientation:cropOn?'landscape':'portrait',paperSize:9,fitToPage:true,fitToWidth:1,fitToHeight:0};
   const bd={top:{style:'thin'},bottom:{style:'thin'},left:{style:'thin'},right:{style:'thin'}},al={horizontal:'center',vertical:'middle'};
   ws.mergeCells('A2:E2');Object.assign(ws.getCell('A2'),{value:'Salidas de Congregación y del Grupo 7',font:{name:'Bahnschrift',bold:true,size:28},alignment:al});ws.getRow(2).height=39.3;
   ws.mergeCells('A3:E3');Object.assign(ws.getCell('A3'),{value:$('#sub').value||'',font:{name:'Bahnschrift Light SemiCondensed',bold:true,size:24},alignment:al});ws.getRow(3).height=38.45;
-  ['Día','Hora','Lugar de encuentro','Territorio','Conductor'].forEach((h,i)=>Object.assign(ws.getCell(4,i+1),{value:h,font:{name:'Bahnschrift SemiLight',bold:true,size:16},fill:{type:'pattern',pattern:'solid',fgColor:{argb:'FF00FE7F'}},border:bd,alignment:al}));
+  ['Día','Hora','Lugar de encuentro','Territ.','Conductor'].forEach((h,i)=>Object.assign(ws.getCell(4,i+1),{value:h,font:{name:'Bahnschrift SemiLight',bold:true,size:16},fill:{type:'pattern',pattern:'solid',fgColor:{argb:'FF00FE7F'}},border:bd,alignment:al}));
   ws.getRow(4).height=44.75;
   rows.forEach((r,i)=>{
     const n=r.manual?'Bahnschrift SemiBold':'Bahnschrift Light SemiCondensed',y=5+i;
@@ -408,15 +447,15 @@ function go(v){
 function applyTheme(){
   if(theme==='system')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',theme);
   $$('#themes button').forEach(b=>b.classList.toggle('on',b.dataset.t===theme));
+  $('#themes').style.setProperty('--i',['light','dark','system'].indexOf(theme));
 }
 let enterNav=false;
 function followTo(n){
-  const v=window.visualViewport,h=$('header').getBoundingClientRect().bottom,vh=Math.min(v?v.height:innerHeight,innerHeight*.62),ot=v?v.offsetTop:0,r=n.getBoundingClientRect();
+  const v=window.visualViewport,h=Math.max($('header').getBoundingClientRect().bottom,40),vh=Math.min(v?v.height:innerHeight,innerHeight*.62),ot=v?v.offsetTop:0,r=n.getBoundingClientRect();
   const d=r.top-ot+r.height/2-(h+(vh-h)*.38),s=$("#sc").scrollTop,t0=performance.now();
   const f=t=>{const k=Math.min(1,(t-t0)/130);$("#sc").scrollTop=s+d*(1-Math.pow(1-k,3));if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f);
 }
 try{screen.orientation.lock('portrait').catch(()=>{})}catch(e){}
-if(window.visualViewport){const sy=()=>{const h=$('header');if(h)h.style.transform=`translateY(${visualViewport.offsetTop}px)`};visualViewport.addEventListener('scroll',sy);visualViewport.addEventListener('resize',sy)}
 ['gesturestart','gesturechange','gestureend'].forEach(n=>document.addEventListener(n,e=>e.preventDefault()));
 document.addEventListener('DOMContentLoaded',()=>{
   $$('[data-i]').forEach(e=>e.innerHTML=ic(e.dataset.i));
@@ -434,7 +473,10 @@ document.addEventListener('DOMContentLoaded',()=>{
   };
   $('#clear').onclick=()=>{$('#raw').value='';rows=[];$('#sub').value='';renderRows()};
   $('#addrow').onclick=()=>{rows.push({dia:'',hora:'',lugar:'',territorio:'',conductor:'',manual:false,src:''});renderRows();const c=$$('#rows .rc');c[c.length-1].classList.add('enter')};
-  $('#rows').addEventListener('input',e=>{const t=e.target;if(t.dataset.f)rows[+t.dataset.i][t.dataset.f]=t.value});
+  $('#rows').addEventListener('input',e=>{const t=e.target;if(t.dataset.f){rows[+t.dataset.i][t.dataset.f]=t.value;updatePreview()}});
+  $('#sub').addEventListener('input',updatePreview);
+  $('#crop').classList.toggle('on',cropOn);
+  $('#cropr').onclick=()=>{cropOn=!cropOn;LS.set('g7_crop',cropOn);$('#crop').classList.toggle('on',cropOn);updatePreview()};
   $('#rows').addEventListener('change',()=>remember());
   $('#rows').addEventListener('keydown',e=>{
     if(e.key!=='Enter'||e.target.tagName!=='INPUT')return;e.preventDefault();
@@ -454,6 +496,29 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('#b-wa').onclick=e=>guard(e.currentTarget,shareWA);
   $('#b-xl').onclick=e=>guard(e.currentTarget,makeXLSX);
   $('#b-pdf').onclick=e=>guard(e.currentTarget,async()=>makePDF());
+  (function(){
+    const f=$('#fs'),im=$('#fsimg'),P=new Map();let sc=1,x=0,y=0,s0=1,d0=1,lt=0;
+    const ap=a=>{im.style.transition=a?'transform .28s cubic-bezier(.2,.8,.2,1)':'none';im.style.transform=`translate(${x}px,${y}px) scale(${sc})`};
+    const lim=()=>{const mx=Math.max(0,(im.offsetWidth*sc-innerWidth)/2),my=Math.max(0,(im.offsetHeight*sc-innerHeight)/2);x=Math.min(mx,Math.max(-mx,x));y=Math.min(my,Math.max(-my,y))};
+    const zoomAt=(s,cx,cy)=>{s=Math.min(5,Math.max(1,s));const r=s/sc,px=cx-innerWidth/2,py=cy-innerHeight/2;x=px-(px-x)*r;y=py-(py-y)*r;sc=s};
+    const close=()=>{f.className='closing';setTimeout(()=>{f.className=''},200)};
+    $('#pv').onclick=()=>{if(!pvURL)return;im.src=pvURL;sc=1;x=y=0;ap(false);f.className='open'};
+    $('#fsx').onclick=close;
+    f.addEventListener('pointerdown',e=>{
+      if(e.target.closest('#fsx'))return;f.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);
+      if(P.size===2){const a=[...P.values()];d0=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])||1;s0=sc;lt=0}
+      else{const n=Date.now();if(n-lt<300){zoomAt(sc>1.2?1:2.5,e.clientX,e.clientY);lim();ap(true);lt=0}else lt=n}
+    });
+    f.addEventListener('pointermove',e=>{
+      if(!P.has(e.pointerId))return;const o=P.get(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);const a=[...P.values()];
+      if(P.size===2){zoomAt(s0*Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])/d0,(a[0][0]+a[1][0])/2,(a[0][1]+a[1][1])/2);ap(false)}
+      else if(sc>1){x+=e.clientX-o[0];y+=e.clientY-o[1];ap(false)}
+    });
+    const up=e=>{P.delete(e.pointerId);if(!P.size){lim();ap(true)}};
+    f.addEventListener('pointerup',up);f.addEventListener('pointercancel',up);
+    f.addEventListener('wheel',e=>{e.preventDefault();zoomAt(sc*Math.exp(-e.deltaY*.002),e.clientX,e.clientY);lim();ap(false)},{passive:false});
+    addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('open'))close()});
+  })();
   $$('#mtabs button').forEach(b=>b.onclick=()=>{mtab=b.dataset.k;renderMem()});
   $('#madd').onclick=()=>{addMem(mtab,$('#mi').value);$('#mi').value='';saveMem();renderMem()};
   $('#mi').addEventListener('keydown',e=>{if(e.key==='Enter')$('#madd').click()});
